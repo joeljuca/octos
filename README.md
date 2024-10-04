@@ -28,6 +28,16 @@ $ make repl.run
 
 In either case, the server must be available in http://localhost:4000.
 
+### The seeding script `seeds.exs`
+
+There's a seeding script available. It created 1K users with 50 cameras each (50K cameras in total).
+
+Run it with:
+
+```
+$ mix run priv/repo/seeds.exs
+```
+
 ### The `Makefile`
 
 This project provides a `Makefile` with a common `make`-based CLI interface:
