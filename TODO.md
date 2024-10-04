@@ -1,8 +1,9 @@
 # TODO
 
 - [x] Set up a Phoenix app
-- [ ] Set up a CI pipeline
-- [ ] Config Ecto repo to use env `DATABASE_URL`
+- [x] Set up a CI pipeline
+- [x] Write a proper `README.md`
+- [x] Config Ecto repo to use env `DATABASE_URL`
 - [ ] Set up a Accounts ctx and the User schema
 - [ ] Set up a Cameras ctx and schemas Cam, Model, Brand
 - [ ] Write a seeding script w/ 1K users w/ 50 cams each
