@@ -5,7 +5,7 @@
 - [x] Write a proper `README.md`
 - [x] Config Ecto repo to use env `DATABASE_URL`
 - [x] Set up a Accounts ctx and the User schema
-- [ ] Set up a Cameras ctx and schemas Cam, Model, Brand
+- [x] Set up a Cameras ctx and the schema Camera
 - [ ] Write a seeding script w/ 1K users w/ 50 cams each
   - At least 1 cam should be active
   - 4 brands: Intelbras, Hikvision, Giga, Vivotek
