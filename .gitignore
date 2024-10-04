@@ -25,3 +25,6 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 octos-*.tar
 
+# .env & .envrc (direnv)
+.env
+.envrc
