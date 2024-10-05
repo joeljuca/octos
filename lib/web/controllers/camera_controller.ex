@@ -6,8 +6,9 @@ defmodule OctosWeb.CameraController do
 
   action_fallback OctosWeb.FallbackController
 
-  def index(conn, _params) do
-    with {:ok, users} <- Accounts.list_users(),
+  def index(conn, params) do
+    with params <- params |> Map.take(["order_by", "order"]),
+         {:ok, users} <- Accounts.list_users(params),
          users <- users |> Enum.map(&User.to_json/1) do
       json(conn, %{users: users})
     end
