@@ -8,6 +8,7 @@ defmodule Octos.Repo.Migrations.CreateCamera do
       add :user_id, references(:user, on_delete: :delete_all), null: false
       add :brand, :string, null: false
       add :model, :string, null: false
+      add :name, :string, null: false
       add :status, :boolean, null: false, default: true
     end
 

@@ -18,7 +18,8 @@ defmodule Octos.Factory do
     %Octos.Cameras.Camera{
       user_id: user_id,
       brand: Octos.Cameras.Camera.brands() |> Enum.random(),
-      model: "#{Faker.Cat.name()}#{1..9 |> Enum.random()}",
+      model: "#{Faker.Lorem.word() |> String.upcase()}#{1..9 |> Enum.random()}",
+      name: "#{Faker.Cat.name()}",
       status: [true, false] |> Enum.random()
     }
   end

@@ -21,7 +21,7 @@ defmodule Octos.Cameras.Camera do
 
     field :brand, Ecto.Enum, values: @brands
     field :model, :string
-    field :name, :string, virtual: true
+    field :name, :string
     field :status, :boolean, default: true
 
     timestamps(type: :utc_datetime)
@@ -31,8 +31,8 @@ defmodule Octos.Cameras.Camera do
           Ecto.Changeset.t()
   def changeset(camera, attrs) do
     camera
-    |> cast(attrs, [:user_id, :brand, :model, :status])
-    |> validate_required([:user_id, :brand, :model, :status])
+    |> cast(attrs, [:user_id, :brand, :model, :name, :status])
+    |> validate_required([:user_id, :brand, :model, :name, :status])
     |> validate_inclusion(:brand, @brands)
     |> validate_length(:model, min: 1)
   end
@@ -40,18 +40,6 @@ defmodule Octos.Cameras.Camera do
   @spec brands() ::
           list(atom())
   def brands, do: @brands
-
-  @spec compute_name(struct :: t()) ::
-          String.t()
-  def compute_name(%{__struct__: __MODULE__} = camera) do
-    "##{camera.id} (#{camera.brand} #{camera.model})"
-  end
-
-  @spec compute_name(struct :: t()) ::
-          t()
-  def put_name(%{__struct__: __MODULE__} = camera) do
-    %{camera | name: compute_name(camera)}
-  end
 
   @spec to_json(struct :: t()) ::
           map()
