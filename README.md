@@ -2,8 +2,6 @@
 
 [![GitHub Actions](https://github.com/joeljuca/octos/actions/workflows/elixir.yaml/badge.svg)](https://github.com/joeljuca/octos/actions/workflows/elixir.yaml)
 
-My solution for the Elixir challenge of Octos AI.
-
 ## Setup
 
 Set everything up quickly with:
