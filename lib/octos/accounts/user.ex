@@ -2,16 +2,20 @@ defmodule Octos.Accounts.User do
   use Ecto.Schema
   use SwissSchema, repo: Octos.Repo
   import Ecto.Changeset
+  alias Octos.Cameras.Camera
 
   @type t :: %{
           __struct__: __MODULE__,
           name: String.t(),
-          email: String.t()
+          email: String.t(),
+          cameras: list(Camera.t())
         }
 
   schema "user" do
     field :name, :string
     field :email, :string, redact: true
+
+    has_many :cameras, Camera
 
     timestamps(type: :utc_datetime)
   end
