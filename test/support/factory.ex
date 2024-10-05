@@ -13,7 +13,11 @@ defmodule Octos.Factory do
   # Cameras ctx
 
   def camera_factory(params) do
-    user_id = Map.get(params, :user_id, insert(:user).id)
+    user_id =
+      case Map.get(params, :user_id) do
+        user_id when not is_nil(user_id) -> user_id
+        _ -> insert(:user).id
+      end
 
     %Octos.Cameras.Camera{
       user_id: user_id,
