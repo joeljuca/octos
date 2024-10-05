@@ -6,8 +6,8 @@ defmodule Octos.AccountsTest do
   setup do
     for m <- [Octos.Cameras.Camera, Octos.Accounts.User], do: Octos.Repo.delete_all(m)
 
-    insert(:user)
-    |> then(&insert_list(2, :camera, user_id: &1.id))
+    insert_list(3, :user)
+    |> then(&for u <- &1, do: insert_list(2, :camera, user_id: u.id))
 
     :ok
   end
@@ -20,9 +20,12 @@ defmodule Octos.AccountsTest do
     end
 
     test "allows ordering by name (asc)" do
-      insert(:user)
+      insert_list(100, :user)
 
-      user_names = Octos.Accounts.User.all() |> Enum.map(& &1.name)
+      user_names =
+        Octos.Accounts.User.all()
+        |> Enum.sort_by(& &1.name)
+        |> Enum.map(& &1.name)
 
       assert {:ok, users} = Accounts.list_users(%{"order_by" => "name"})
       assert is_list(users)
@@ -31,9 +34,12 @@ defmodule Octos.AccountsTest do
     end
 
     test "allows ordering by name (desc)" do
-      insert(:user)
+      insert_list(100, :user)
 
-      user_names = Octos.Accounts.User.all() |> Enum.map(& &1.name) |> Enum.sort(:desc)
+      user_names =
+        Octos.Accounts.User.all()
+        |> Enum.sort_by(& &1.name, :desc)
+        |> Enum.map(& &1.name)
 
       assert {:ok, users} = Accounts.list_users(%{"order_by" => "name", "order" => "desc"})
       assert is_list(users)
