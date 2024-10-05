@@ -10,7 +10,7 @@
   - At least 1 cam should be active
   - 4 brands: Intelbras, Hikvision, Giga, Vivotek
   - Seeding must be FAST!
-- [ ] Endpoint `GET /cameras` to list users and their cameras
+- [x] Endpoint `GET /cameras` to list users and their cameras
   - User objs with their name and active cameras
   - Support filters and ordering over cam names
 - [ ] Endpoint `POST /notify-users` to notify users thru email
