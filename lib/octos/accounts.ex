@@ -22,7 +22,9 @@ defmodule Octos.Accounts do
       |> preload([u], [:cameras])
       |> distinct(true)
       |> then(fn query ->
-        if is_nil(order_by), do: query, else: query |> order_by([u], [{^order, ^order_by}])
+        if is_nil(order_by),
+          do: query |> order_by([u], asc: :id),
+          else: query |> order_by([u], [{^order, ^order_by}])
       end)
 
     {:ok, Repo.all(query)}
