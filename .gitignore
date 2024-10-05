@@ -28,3 +28,6 @@ octos-*.tar
 # .env & .envrc (direnv)
 .env
 .envrc
+
+# See: https://dev.to/joeljuca/introducing-iex-local-exs-2bfk
+.iex.local.exs
