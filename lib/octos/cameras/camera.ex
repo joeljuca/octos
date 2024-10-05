@@ -52,4 +52,10 @@ defmodule Octos.Cameras.Camera do
   def put_name(%{__struct__: __MODULE__} = camera) do
     %{camera | name: compute_name(camera)}
   end
+
+  @spec to_json(struct :: t()) ::
+          map()
+  def to_json(%{__struct__: __MODULE__} = struct) do
+    struct |> Map.take([:id, :brand, :model, :name, :status])
+  end
 end

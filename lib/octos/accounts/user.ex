@@ -29,4 +29,18 @@ defmodule Octos.Accounts.User do
     |> validate_length(:name, min: 2)
     |> validate_format(:email, ~r/^\w[\w-.+]*@[a-z0-9]+(?:\.[a-z0-9-]+)+$/i)
   end
+
+  @spec to_json(struct :: t()) ::
+          map()
+  def to_json(%{__struct__: __MODULE__} = struct) do
+    cameras =
+      case Map.get(struct, :cameras) do
+        cameras when is_list(cameras) -> cameras |> Enum.map(&Camera.to_json/1)
+        cameras -> cameras
+      end
+
+    struct
+    |> Map.put(:cameras, cameras)
+    |> Map.take([:id, :name, :email, :cameras])
+  end
 end
