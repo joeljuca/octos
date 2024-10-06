@@ -7,6 +7,8 @@ defmodule Octos.Application do
 
   @impl true
   def start(_type, _args) do
+    Oban.Telemetry.attach_default_logger()
+
     children = [
       OctosWeb.Telemetry,
       Octos.Repo,
@@ -14,6 +16,8 @@ defmodule Octos.Application do
       {Phoenix.PubSub, name: Octos.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Octos.Finch},
+      # Start Oban
+      {Oban, Application.fetch_env!(:octos, Oban)},
       # Start a worker by calling: Octos.Worker.start_link(arg)
       # {Octos.Worker, arg},
       # Start to serve requests, typically the last entry
