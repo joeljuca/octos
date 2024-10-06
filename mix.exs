@@ -32,6 +32,7 @@ defmodule Octos.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:oban, "~> 2.18"},
       {:faker, "~> 0.18.0", only: [:dev, :test]},
       {:ex_machina, "~> 2.8", only: [:dev, :test]},
       {:swiss_schema, "~> 0.6"},
