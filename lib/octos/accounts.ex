@@ -31,4 +31,39 @@ defmodule Octos.Accounts do
   rescue
     error -> {:error, error}
   end
+
+  @spec notify_users(params :: map()) ::
+          :ok | {:error, term()}
+  def notify_users(%{"notification" => %{}} = params \\ %{}) do
+    batch = params |> Map.get("batch", 2)
+    notification = params |> Map.fetch!("notification")
+
+    t = fn ->
+      first_id =
+        from(u in Accounts.User)
+        |> select([u], u.id)
+        |> order_by([u], asc: u.id)
+        |> limit(1)
+        |> Octos.Repo.one()
+
+      if is_nil(first_id) do
+        # No user in database
+        :ok
+      else
+        params = %{
+          notification: notification,
+          batch: batch,
+          from: first_id
+        }
+
+        with changeset <- Accounts.Workers.NotifyUsers.new(params),
+             {:ok, job} <- Oban.insert(changeset),
+             do: job
+      end
+    end
+
+    with {:ok, _} <- Octos.Repo.transaction(t), do: :ok
+  rescue
+    error -> {:error, error}
+  end
 end
