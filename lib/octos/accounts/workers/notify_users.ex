@@ -46,6 +46,8 @@ defmodule Octos.Accounts.Workers.NotifyUsers do
   end
 
   defp notify_user(%Accounts.User{} = user, %{} = notification) do
+    # The "notification" thing is implemented as a simple log msg,
+    # but IRL it would be an email, a mobile notification, etc.
     Logger.info("Notify user #{user.id}: #{inspect(notification)}")
   end
 end
