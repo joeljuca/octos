@@ -13,11 +13,11 @@
 - [x] Endpoint `GET /cameras` to list users and their cameras
   - User objs with their name and active cameras
   - Support filters and ordering over cam names
-- [ ] Endpoint `POST /notify-users` to notify users thru email
+- [x] Endpoint `POST /notify-users` to notify users thru email
   - [x] Set up Oban
   - [x] Impl an Oban job to notify users (w/ tests)
   - [x] Impl `Accounts.notify_users/1` (w/ tests)
-  - [ ] Impl controller/action for `POST /notify-users` (w/ tests)
+  - [x] Impl controller/action for `POST /notify-users` (w/ tests)
 - [ ] Set up a release CD pipeline
 
 ## Notes
