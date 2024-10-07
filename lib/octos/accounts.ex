@@ -3,6 +3,7 @@ defmodule Octos.Accounts do
   The Accounts context.
   """
 
+  import Ecto.Changeset
   import Ecto.Query
   alias Octos.Accounts
   alias Octos.Cameras
@@ -37,6 +38,21 @@ defmodule Octos.Accounts do
   def notify_users(%{"notification" => %{}} = params \\ %{}) do
     batch = params |> Map.get("batch", 2)
     notification = params |> Map.fetch!("notification")
+
+    # Validate a notification that looks like:
+    # %{"title" => String.t(), "body" => String.t()}
+    notification_schema = %{
+      title: :string,
+      body: :string
+    }
+
+    notification =
+      {%{}, notification_schema}
+      |> cast(notification, Map.keys(notification_schema))
+      |> validate_required([:title, :body])
+      |> validate_length(:title, max: 64)
+      |> validate_length(:body, max: 128)
+      |> apply_action!(:validate_notification)
 
     t = fn ->
       first_id =

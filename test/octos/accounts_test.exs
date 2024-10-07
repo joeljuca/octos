@@ -51,11 +51,19 @@ defmodule Octos.AccountsTest do
   end
 
   describe "Accounts.notify_users/1" do
+    test "requires a valid notification" do
+      for field <- ["title", "body"] do
+        notification = build(:notification) |> Map.delete(field)
+
+        assert {:error, _} = Accounts.notify_users(%{"notification" => notification})
+      end
+    end
+
     test "no-ops when there's no user" do
-      for s <- [Accounts.User, Oban.Job], do: Repo.delete_all(s)
+      Accounts.User.delete_all()
 
       Oban.Testing.with_testing_mode(:manual, fn ->
-        assert :ok = Accounts.notify_users(%{"notification" => %{}})
+        assert :ok = Accounts.notify_users(%{"notification" => build(:notification)})
         assert [] = Repo.all(Oban.Job)
       end)
     end
@@ -64,7 +72,7 @@ defmodule Octos.AccountsTest do
       insert(:user)
 
       Oban.Testing.with_testing_mode(:manual, fn ->
-        assert :ok = Accounts.notify_users(%{"notification" => %{}})
+        assert :ok = Accounts.notify_users(%{"notification" => build(:notification)})
         assert [%Oban.Job{}] = Repo.all(Oban.Job)
       end)
     end

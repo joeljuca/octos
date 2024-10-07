@@ -13,7 +13,7 @@ defmodule Octos.Accounts.Workers.NotifyUsersTest do
   describe "Accounts.Workers.NotifyUsers.perform/1" do
     test "no-ops when there's no user" do
       Oban.Testing.with_testing_mode(:manual, fn ->
-        args = %{"notification" => %{}}
+        args = %{"notification" => build(:notification)}
 
         perform_job(NotifyUsers, args)
         refute_enqueued(worker: NotifyUsers, args: args)
@@ -25,7 +25,7 @@ defmodule Octos.Accounts.Workers.NotifyUsersTest do
       user = insert(:user)
 
       Oban.Testing.with_testing_mode(:manual, fn ->
-        args = %{"notification" => %{}, "batch" => 2}
+        args = %{"notification" => build(:notification), "batch" => 2}
 
         perform_job(NotifyUsers, args)
         assert_enqueued(worker: NotifyUsers, args: args |> Map.put("from", user.id))

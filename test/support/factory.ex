@@ -27,4 +27,13 @@ defmodule Octos.Factory do
       status: [true, false] |> Enum.random()
     }
   end
+
+  # Misc
+
+  def notification_factory do
+    %{
+      "title" => Faker.Company.bullshit(),
+      "body" => Faker.Lorem.sentence()
+    }
+  end
 end
