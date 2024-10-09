@@ -4,20 +4,46 @@
 
 ## Setup
 
-First, you'll have to set up some required environment variables:
+This project uses the following tools:
+
+- [asdf](https://asdf-vm.com) (runtime versioning tool)
+- [direnv](https://direnv.net) (env-loading tool; optional)
+
+Make sure you have these set up in your system before proceeding.
+
+### Runtimes
+
+Install asdf plugins to manage Erlang and Elixir versions:
+
+```sh
+$ asdf plugin add erlang
+$ asdf plugin add elixir
+```
+
+Then, install Erlang and Elixir versions used in the project:
+
+```sh
+$ asdf install
+```
+
+### Local config
+
+You need to set up some required environment variables:
 
 - `DATABASE_URL` (database connection string)
 
-> 💡 _We use and recommend [direnv](https://direnv.net). There's a `.envrc` template available:_
+You'll find a template for such variables in [`.envrc.template`](.envrc.template).
+
+> 💡 _We use and recommend [direnv](https://direnv.net), there's a `.envrc` template available:_
 >
 > ```sh
 > # Duplicate the template as `.envrc`
 > $ cp .envrc.template .envrc
 > ```
 >
-> _Uncomment the variables and customize it as you wish._
+> _Uncomment the variables and customize it as you need._
 
-Set everything up quickly with:
+If your environment variables looks good, you should be able to set everything up quickly with:
 
 ```
 $ make setup
