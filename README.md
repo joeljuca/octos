@@ -4,6 +4,19 @@
 
 ## Setup
 
+First, you'll have to set up some required environment variables:
+
+- `DATABASE_URL` (database connection string)
+
+> 💡 _We use and recommend [direnv](https://direnv.net). There's a `.envrc` template available:_
+>
+> ```sh
+> # Duplicate the template as `.envrc`
+> $ cp .envrc.template .envrc
+> ```
+>
+> _Uncomment the variables and customize it as you wish._
+
 Set everything up quickly with:
 
 ```
